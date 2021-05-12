@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/codeedu/fc2-grpc/pb"
+	"github.com/robsoninocencio/grpc/pb"
 	"google.golang.org/grpc"
 )
 
@@ -19,9 +19,11 @@ func main() {
 	defer connection.Close()
 
 	client := pb.NewUserServiceClient(connection)
+
 	// AddUser(client)
 	// AddUserVerbose(client)
 	// AddUsers(client)
+
 	AddUserStreamBoth(client)
 
 }
@@ -168,6 +170,7 @@ func AddUserStreamBoth(client pb.UserServiceClient) {
 				break
 			}
 			fmt.Printf("Recebendo user %v com status: %v\n", res.GetUser().GetName(), res.GetStatus())
+			fmt.Printf("\n")
 		}
 		close(wait)
 	}()
